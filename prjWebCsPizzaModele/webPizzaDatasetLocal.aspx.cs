@@ -15,31 +15,25 @@ namespace prjWebCsPizzaModele
         static DataSet setPizza;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+
+
+            if (IsPostBack == false)
             {
                 txtAdresse.Visible = false;
                 lblAdresse.Visible = false;
                 panPrix.Visible = false;
                 panCommande.Visible = false;
 
-                // set dataset
+                // vous devez creer cette fonction
                 setPizza = ConnecterBD_RemplirDataset();
 
-                // use function
-                RemplirListControl(cboPizzas, setPizza.Tables["Pizzas"], "Nom", "Prix");
-                RemplirListControl(lstTailles, setPizza.Tables["Tailles"], "Nom", "Ratio");
-                RemplirListControl(lstRadCroutes, setPizza.Tables["Croutes"], "Nom", "Prix");
+                //setPizza = CreerEtRemplirDataset();
 
-                // add info to listbox or checkboxlist
-                foreach (DataRow row in setPizza.Tables["Garnitures"].Rows)
-                {
-                    ListItem item = new ListItem(row["Nom"].ToString(), row["Prix"].ToString());
-                    lstChkGarnitures.Items.Add(item);
-                }
+                RemplirPizza(setPizza.Tables["Pizzas"]);
+                RemplirTailles(setPizza.Tables["Tailles"]);
+                RemplirGarnitures(setPizza.Tables["Garnitures"]);
+                RemplirCroutes(setPizza.Tables["Croutes"]);
 
-                // selection par default in dropdown
-                cboPizzas.Items.Insert(0, new ListItem("please select a pizza", "0"));
-                cboPizzas.SelectedIndex = 0;
             }
             else
             {
@@ -53,17 +47,10 @@ namespace prjWebCsPizzaModele
                 {
                     panPrix.Visible = false;
                 }
+
             }
-        }
 
-        private void RemplirListControl(ListControl control, DataTable table, string textField, string valueField)
-        {
-            control.DataSource = table;
-            control.DataTextField = textField;
-            control.DataValueField = valueField;
-            control.DataBind();
         }
-
 
         private DataSet ConnecterBD_RemplirDataset()
         {
@@ -126,21 +113,45 @@ namespace prjWebCsPizzaModele
             litPrix.Text += "<strong>Total  " + total + " $</strong>";
         }
 
-        //hide from this part
         private void RemplirCroutes(DataTable tabCroute)
         {
             // version databinding
-            lstRadCroutes.DataSource = tabCroute;
-            lstRadCroutes.DataTextField = "Nom";
-            lstRadCroutes.DataValueField = "Prix";
-            lstRadCroutes.DataBind();
+            //lstRadCroutes.DataSource = tabCroute;
+            //lstRadCroutes.DataTextField = "Nom";
+            //lstRadCroutes.DataValueField = "Prix";
+            //lstRadCroutes.DataBind();
 
-            // Projet 2, Remplir la liste des pizzas
-            //Faites les versions
-            // 1) la methode boucle foreach
-            // 2) la methode databinding avec LINQ sur dataset
+
+            //version foreach
+
+            lstRadCroutes.Items.Clear();
+
+            foreach (DataRow row in tabCroute.Rows)
+            {
+                string nom = row["Nom"].ToString();
+                string prix = row["Prix"].ToString();
+                ListItem item = new ListItem(nom, prix);
+                lstRadCroutes.Items.Add(item);
+            }
 
             lstRadCroutes.SelectedIndex = 0;
+
+
+            //version linq
+
+            //var items = from DataRow row in tabCroute.Rows
+            //            select new
+            //            {
+            //                Nom = row["Nom"].ToString(),
+            //                Prix = row["Prix"].ToString()
+            //            };
+
+            //lstRadCroutes.DataSource = items.ToList();
+            //lstRadCroutes.DataTextField = "Nom";
+            //lstRadCroutes.DataValueField = "Prix";
+            //lstRadCroutes.DataBind();
+
+            //lstRadCroutes.SelectedIndex = 0;
         }
 
         private void RemplirGarnitures(DataTable tabGarni)
@@ -196,6 +207,7 @@ namespace prjWebCsPizzaModele
 
         }
 
+        //hide from this part
         private DataSet CreerEtRemplirDataset()
         {
             DataSet mySet = new DataSet();
@@ -344,7 +356,6 @@ namespace prjWebCsPizzaModele
 
             return mySet;
         }
-
         //hide until this part
 
         protected void btnCommander_Click(object sender, EventArgs e)
@@ -391,6 +402,8 @@ namespace prjWebCsPizzaModele
                 if (row["Telephone"].ToString() == telephone)
                 {
                     txtNom.Text = row["Nom"].ToString();
+                    txtAdresse.Text = row["Adresse"].ToString();
+
                     return;
                 }
             }
@@ -402,6 +415,7 @@ namespace prjWebCsPizzaModele
             //if (foundRows.Length > 0)
             //{
             //    txtNom.Text = foundRows[0]["Nom"].ToString();
+            //    txtAdresse.Text = foundRows[0]["Adresse"].ToString();
             //}
 
 

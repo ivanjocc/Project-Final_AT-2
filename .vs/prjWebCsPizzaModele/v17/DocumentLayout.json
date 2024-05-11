@@ -48,9 +48,9 @@
               "RelativeDocumentMoniker": "prjWebCsPizzaModele\\webPizzaDatasetLocal.aspx",
               "ToolTip": "C:\\Users\\ivanj\\Desktop\\AAA\\teccart\\session-4\\at\\final-v4\\prjWebCsPizzaModele\\prjWebCsPizzaModele\\webPizzaDatasetLocal.aspx",
               "RelativeToolTip": "prjWebCsPizzaModele\\webPizzaDatasetLocal.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-05-11T15:28:36.598Z"
+              "WhenOpened": "2024-05-11T15:28:36.598Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -60,7 +60,7 @@
               "RelativeDocumentMoniker": "prjWebCsPizzaModele\\webPizzaDatasetLocal.aspx.cs",
               "ToolTip": "C:\\Users\\ivanj\\Desktop\\AAA\\teccart\\session-4\\at\\final-v4\\prjWebCsPizzaModele\\prjWebCsPizzaModele\\webPizzaDatasetLocal.aspx.cs",
               "RelativeToolTip": "prjWebCsPizzaModele\\webPizzaDatasetLocal.aspx.cs",
-              "ViewState": "AQIAAHwBAAAAAAAAAAAUwLYBAAAvAAAA",
+              "ViewState": "AQIAADIAAAAAAAAAAADwv6AAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-09T03:05:54.481Z",
               "EditorCaption": ""
@@ -75,7 +75,8 @@
               "RelativeToolTip": "prjWebCsPizzaModele\\webPizzaManage.aspx.cs",
               "ViewState": "AQIAAGwAAAAAAAAAAAAYwLoAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-09T05:39:25.011Z"
+              "WhenOpened": "2024-05-09T05:39:25.011Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -85,9 +86,9 @@
               "RelativeDocumentMoniker": "prjWebCsPizzaModele\\webPizzaManage.aspx",
               "ToolTip": "C:\\Users\\ivanj\\Desktop\\AAA\\teccart\\session-4\\at\\final-v4\\prjWebCsPizzaModele\\prjWebCsPizzaModele\\webPizzaManage.aspx",
               "RelativeToolTip": "prjWebCsPizzaModele\\webPizzaManage.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-05-09T05:33:52.134Z"
+              "WhenOpened": "2024-05-09T05:33:52.134Z",
+              "EditorCaption": ""
             }
           ]
         },
