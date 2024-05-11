@@ -30,7 +30,48 @@ namespace prjWebCsPizzaModele
                 Afficher();
 
                 MontrerBoutons(true, false);
+
+                ViewState["EditMode"] = "View";
+                ManageUI();
             }
+        }
+
+        private void ManageUI()
+        {
+            string mode = ViewState["EditMode"] as string;
+            switch (mode)
+            {
+                case "Add":
+                    ClearFields();
+                    EnableFields(true);
+                    MontrerBoutons(false, true);
+                    break;
+                case "Edit":
+                    EnableFields(true);
+                    MontrerBoutons(false, true);
+                    break;
+                case "View":
+                default:
+                    EnableFields(false);
+                    MontrerBoutons(true, false);
+                    if (tabPizza.Rows.Count > 0 && indiceCourant >= 0)
+                        Afficher();
+                    break;
+            }
+        }
+
+        private void ClearFields()
+        {
+            txtPizza.Text = "";
+            txtPrix.Text = "";
+            txtDescription.Text = "";
+        }
+
+        private void EnableFields(bool enable)
+        {
+            txtPizza.Enabled = enable;
+            txtPrix.Enabled = enable;
+            txtDescription.Enabled = enable;
         }
 
         private DataSet CreerEtRemplirDataset()
@@ -257,6 +298,71 @@ namespace prjWebCsPizzaModele
         {
             indiceCourant = tabPizza.Rows.Count - 1;
             Afficher();
+        }
+
+        protected void btnAjouter_Click(object sender, EventArgs e)
+        {
+            ViewState["EditMode"] = "Add";
+            ManageUI();
+        }
+
+        protected void btnModifier_Click(object sender, EventArgs e)
+        {
+            ViewState["EditMode"] = "Edit";
+            indiceCourant = (tabPizza.Rows.Count > 0) ? indiceCourant : -1;
+            ManageUI();
+        }
+
+        protected void BtnSupprimer_Click(object sender, EventArgs e)
+        {
+            if (tabPizza.Rows.Count > 0 && indiceCourant >= 0 && indiceCourant < tabPizza.Rows.Count)
+            {
+                tabPizza.Rows[indiceCourant].Delete();
+
+                tabPizza.AcceptChanges();
+
+                if (tabPizza.Rows.Count > 0)
+                {
+                    indiceCourant = (indiceCourant > 0) ? indiceCourant - 1 : 0;
+                    Afficher();
+                }
+                else
+                {
+                    txtPizza.Text = "";
+                    txtPrix.Text = "";
+                    txtDescription.Text = "";
+                    lblInfo.Text = "nothing here";
+                    indiceCourant = -1;
+                }
+            }
+        }
+
+        protected void btnSauvegarder_Click(object sender, EventArgs e)
+        {
+            if ((string)ViewState["EditMode"] == "Add")
+            {
+                DataRow newRow = tabPizza.NewRow();
+                newRow["Nom"] = txtPizza.Text;
+                newRow["Prix"] = Convert.ToDecimal(txtPrix.Text);
+                newRow["Description"] = txtDescription.Text;
+                tabPizza.Rows.Add(newRow);
+            }
+            else if ((string)ViewState["EditMode"] == "Edit")
+            {
+                DataRow row = tabPizza.Rows[indiceCourant];
+                row["Nom"] = txtPizza.Text;
+                row["Prix"] = Convert.ToDecimal(txtPrix.Text);
+                row["Description"] = txtDescription.Text;
+            }
+
+            ViewState["EditMode"] = "View";
+            ManageUI();
+        }
+
+        protected void btnAnnuler_Click(object sender, EventArgs e)
+        {
+            ViewState["EditMode"] = "View";
+            ManageUI();
         }
     }
 }

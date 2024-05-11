@@ -51,11 +51,11 @@
                                     <asp:TextBox ID="txtPizza" runat="server" CssClass="boite" Font-Bold="True" ForeColor="Blue" Width="200px" BorderStyle="Solid" BorderWidth="2px"></asp:TextBox>
                                 </td>
                                 <td rowspan="5" style="vertical-align:top">
-                                    <asp:Button ID="btnAjouter" runat="server" Text="Ajouter" CssClass="bouton" Font-Bold="True" Width="100px" /><br />
-                                    <asp:Button ID="btnModifier" runat="server" Text="Modifier" CssClass="bouton" Font-Bold="True" Width="100px"  /><br />
-                                    <asp:Button ID="BtnSupprimer" runat="server" Text="Supprimer" CssClass="bouton" Font-Bold="True" Width="100px"  /><br />
-                                    <asp:Button ID="btnSauvegarder" runat="server" Text="Sauvegarder" CssClass="bouton" Font-Bold="True" Width="100px"  /><br />
-                                    <asp:Button ID="btnAnnuler" runat="server" Text="Annuler" CssClass="bouton" Font-Bold="True" Width="100px"  />
+                                    <asp:Button ID="btnAjouter" runat="server" Text="Ajouter" CssClass="bouton" Font-Bold="True" Width="100px" OnClick="btnAjouter_Click" /><br />
+                                    <asp:Button ID="btnModifier" runat="server" Text="Modifier" CssClass="bouton" Font-Bold="True" Width="100px" OnClick="btnModifier_Click" /><br />
+                                    <asp:Button ID="BtnSupprimer" runat="server" Text="Supprimer" CssClass="bouton" Font-Bold="True" Width="100px" OnClick="BtnSupprimer_Click" OnClientClick="return confirm('are you sure you want to delete this?');" /><br />
+                                    <asp:Button ID="btnSauvegarder" runat="server" Text="Sauvegarder" CssClass="bouton" Font-Bold="True" Width="100px" OnClick="btnSauvegarder_Click" /><br />
+                                    <asp:Button ID="btnAnnuler" runat="server" Text="Annuler" CssClass="bouton" Font-Bold="True" Width="100px" OnClick="btnAnnuler_Click" />
                                 </td>
                              </tr>
                             <tr>
