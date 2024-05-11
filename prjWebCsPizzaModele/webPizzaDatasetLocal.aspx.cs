@@ -156,55 +156,113 @@ namespace prjWebCsPizzaModele
 
         private void RemplirGarnitures(DataTable tabGarni)
         {
-            foreach (DataRow myrow in tabGarni.Rows)
-            {
-                ListItem elm = new ListItem();
-                elm.Text = myrow["Nom"].ToString();
-                elm.Value = myrow["Prix"].ToString();
-                lstChkGarnitures.Items.Add(elm);
-            }
+            //foreach (DataRow myrow in tabGarni.Rows)
+            //{
+            //    ListItem elm = new ListItem();
+            //    elm.Text = myrow["Nom"].ToString();
+            //    elm.Value = myrow["Prix"].ToString();
+            //    lstChkGarnitures.Items.Add(elm);
+            //}
 
-            // Projet 2, Remplir la liste des garnitures
-            //Faites les versions
-            // 1) la methode databinding avec datatable
-            // 2) la methode databinding avec LINQ sur dataset
+            //version databind
+
+            //lstChkGarnitures.Items.Clear();
+
+            //lstChkGarnitures.DataSource = tabGarni;
+            //lstChkGarnitures.DataTextField = "Nom";
+            //lstChkGarnitures.DataValueField = "Prix";
+            //lstChkGarnitures.DataBind();
+
+
+            //version linq
+
+            var garnitures = from DataRow row in tabGarni.Rows
+                             select new
+                             {
+                                 Nom = row["Nom"].ToString(),
+                                 Prix = row["Prix"].ToString()
+                             };
+
+            lstChkGarnitures.DataSource = garnitures.ToList();
+            lstChkGarnitures.DataTextField = "Nom";
+            lstChkGarnitures.DataValueField = "Prix";
+            lstChkGarnitures.DataBind();
+
         }
 
         private void RemplirTailles(DataTable tabTailles)
         {
-            foreach (DataRow myrow in tabTailles.Rows)
-            {
-                ListItem elm = new ListItem();
-                elm.Text = myrow["Nom"].ToString();
-                elm.Value = myrow["Ratio"].ToString();
-                lstTailles.Items.Add(elm);
-            }
-            lstTailles.SelectedIndex = 0;
-            // Projet 2, Remplir la liste des tailles
-            //Faites les versions
-            // 1) la methode databinding avec datatable
-            // 2) la methode databinding avec LINQ sur dataset
+            //foreach (DataRow myrow in tabTailles.Rows)
+            //{
+            //    ListItem elm = new ListItem();
+            //    elm.Text = myrow["Nom"].ToString();
+            //    elm.Value = myrow["Ratio"].ToString();
+            //    lstTailles.Items.Add(elm);
+            //}
+            //lstTailles.SelectedIndex = 0;
+
+            //version databind
+
+            //lstTailles.Items.Clear();
+            //lstTailles.DataSource = tabTailles;
+            //lstTailles.DataTextField = "Nom";
+            //lstTailles.DataValueField = "Ratio";
+            //lstTailles.DataBind();
+
+
+            //version linq
+
+            var tailles = from DataRow row in tabTailles.Rows
+                          select new
+                          {
+                              Nom = row["Nom"].ToString(),
+                              Ratio = row["Ratio"].ToString()
+                          };
+
+            lstTailles.DataSource= tailles.ToList();
+            lstTailles.DataTextField = "Nom";
+            lstTailles.DataValueField = "Ratio";
+            lstTailles.DataBind();
+
         }
 
         private void RemplirPizza(DataTable tabPizzas)
         {
             cboPizzas.Items.Add(new ListItem("Faites votre choix", "0"));
             // Version boucle
-            foreach (DataRow myrow in tabPizzas.Rows)
-            {
-                ListItem elm = new ListItem();
-                elm.Text = myrow["Nom"].ToString();
-                elm.Value = myrow["Prix"].ToString();
-                cboPizzas.Items.Add(elm);
-            }
+            //foreach (DataRow myrow in tabPizzas.Rows)
+            //{
+            //    ListItem elm = new ListItem();
+            //    elm.Text = myrow["Nom"].ToString();
+            //    elm.Value = myrow["Prix"].ToString();
+            //    cboPizzas.Items.Add(elm);
+            //    cboPizzas.SelectedIndex = 0;
+            //}
 
-            // Projet 2, Remplir la liste des pizzas
-            //Faites les versions
-            // 1) la methode databinding avec datatable
-            // 2) la methode databinding avec LINQ sur dataset
+
+            //version databind
+
+            //cboPizzas.DataSource = tabPizzas;
+            //cboPizzas.DataTextField = "Nom";
+            //cboPizzas.DataValueField = "Prix";
+            //cboPizzas.DataBind();
+
+
+            //version linq
+
+            var pizzas = from DataRow row in tabPizzas.Rows
+                         select new
+                         {
+                             Nom = row["Nom"].ToString(),
+                             Prix = row["Prix"].ToString()
+                         };
+
+            cboPizzas.DataSource= pizzas.ToList();
+            cboPizzas.DataTextField = "Nom";
+            cboPizzas.DataValueField = "Prix";
+            cboPizzas.DataBind();
+
             cboPizzas.SelectedIndex = 0;
-
-
         }
 
         //hide from this part
