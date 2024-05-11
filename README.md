@@ -11,6 +11,7 @@
 --CREATE TABLE Pizzas (
 --    Id INT PRIMARY KEY IDENTITY(1,1),
 --    Nom NVARCHAR(100),
+--    Description NVARCHAR(100),
 --    Prix DECIMAL(5,2)
 --);
 
