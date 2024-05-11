@@ -126,6 +126,7 @@ namespace prjWebCsPizzaModele
             litPrix.Text += "<strong>Total  " + total + " $</strong>";
         }
 
+        //hide from this part
         private void RemplirCroutes(DataTable tabCroute)
         {
             // version databinding
@@ -344,6 +345,8 @@ namespace prjWebCsPizzaModele
             return mySet;
         }
 
+        //hide until this part
+
         protected void btnCommander_Click(object sender, EventArgs e)
         {
             panCommande.Visible = true;
@@ -379,15 +382,62 @@ namespace prjWebCsPizzaModele
 
         protected void btnTrouver_Click(object sender, EventArgs e)
         {
-            // Projet 2
-            // En utilisant le numero de tel, trouver le client et afficher
-            // ses nom et adresse dans les textbox
+            string telephone = txtTelephone.Text;
 
-            // Faites les versions
-            // 1) la methode boucle foreach
-            // 2) la methode Find
-            // 3) la methode Select
-            // 4) la methode LINQ sur dataset
+            //do with foreach (method)
+
+            foreach (DataRow row in setPizza.Tables["Clients"].Rows)
+            {
+                if (row["Telephone"].ToString() == telephone)
+                {
+                    txtNom.Text = row["Nom"].ToString();
+                    return;
+                }
+            }
+
+            //do with select (method)
+
+            //DataRow[] foundRows = setPizza.Tables["Clients"].Select("Telephone = '" + telephone + "'");
+
+            //if (foundRows.Length > 0)
+            //{
+            //    txtNom.Text = foundRows[0]["Nom"].ToString();
+            //}
+
+
+            //do with linq
+
+            //var query = from DataRow client in setPizza.Tables["Clients"].Rows
+            //            where client["Telephone"].ToString() == telephone
+            //            select client;
+
+            ////return first client
+            //DataRow foundClient = query.FirstOrDefault();
+
+            //if (foundClient != null)
+            //{
+            //    txtNom.Text = foundClient["Nom"].ToString();
+            //}
+            //else
+            //{
+            //    txtNom.Text = "client not found";
+            //}
+
+
+            //do with find
+
+            //int clientId = int.Parse(txtTelephone.Text);
+
+            //DataRow foundClient = setPizza.Tables["Clients"].Rows.Find(clientId);
+
+            //if (foundClient != null)
+            //{
+            //    txtNom.Text = foundClient["Nom"].ToString();
+            //}
+            //else
+            //{
+            //    txtNom.Text = "client not found";
+            //}
         }
 
         protected void chkLivraison_CheckedChanged(object sender, EventArgs e)
