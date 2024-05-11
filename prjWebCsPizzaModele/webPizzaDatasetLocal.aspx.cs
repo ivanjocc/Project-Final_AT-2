@@ -230,14 +230,14 @@ namespace prjWebCsPizzaModele
         {
             cboPizzas.Items.Add(new ListItem("Faites votre choix", "0"));
             // Version boucle
-            //foreach (DataRow myrow in tabPizzas.Rows)
-            //{
-            //    ListItem elm = new ListItem();
-            //    elm.Text = myrow["Nom"].ToString();
-            //    elm.Value = myrow["Prix"].ToString();
-            //    cboPizzas.Items.Add(elm);
-            //    cboPizzas.SelectedIndex = 0;
-            //}
+            foreach (DataRow myrow in tabPizzas.Rows)
+            {
+                ListItem elm = new ListItem();
+                elm.Text = myrow["Nom"].ToString();
+                elm.Value = myrow["Prix"].ToString();
+                cboPizzas.Items.Add(elm);
+                cboPizzas.SelectedIndex = 0;
+            }
 
 
             //version databind
@@ -250,19 +250,19 @@ namespace prjWebCsPizzaModele
 
             //version linq
 
-            var pizzas = from DataRow row in tabPizzas.Rows
-                         select new
-                         {
-                             Nom = row["Nom"].ToString(),
-                             Prix = row["Prix"].ToString()
-                         };
+            //var pizzas = from DataRow row in tabPizzas.Rows
+            //             select new
+            //             {
+            //                 Nom = row["Nom"].ToString(),
+            //                 Prix = row["Prix"].ToString()
+            //             };
 
-            cboPizzas.DataSource= pizzas.ToList();
-            cboPizzas.DataTextField = "Nom";
-            cboPizzas.DataValueField = "Prix";
-            cboPizzas.DataBind();
+            //cboPizzas.DataSource= pizzas.ToList();
+            //cboPizzas.DataTextField = "Nom";
+            //cboPizzas.DataValueField = "Prix";
+            //cboPizzas.DataBind();
 
-            cboPizzas.SelectedIndex = 0;
+            //cboPizzas.SelectedIndex = 0;
         }
 
         //hide from this part

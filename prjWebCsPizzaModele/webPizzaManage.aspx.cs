@@ -11,10 +11,6 @@ namespace prjWebCsPizzaModele
 {
     public partial class webPizzaManage : System.Web.UI.Page
     {
-        // Projet 2
-        // Programmer les 5 boutons de gestion
-       
-
         // declaration des variables globales
         static DataSet mySet;
         
@@ -24,16 +20,16 @@ namespace prjWebCsPizzaModele
         {
             if (IsPostBack == false)
             {
-                mySet = CreerEtRemplirDataset();
+                //mySet = CreerEtRemplirDataset();
+
+                mySet = RemplirDataset();
+
                 tabPizza = mySet.Tables["Pizzas"];
 
                 indiceCourant = 0;
                 Afficher();
 
                 MontrerBoutons(true, false);
-
-                // Projet 2
-                // mySet = RemplirDataset();
             }
         }
 
@@ -94,13 +90,13 @@ namespace prjWebCsPizzaModele
             // Ajouter les clients
             DataRow myrow = mySet.Tables["Clients"].NewRow();
             myrow["Nom"] = "Bill Gates";
-            myrow["Telephone"] = "5141234567";
+            myrow["Telephone"] = "123";
             myrow["Adresse"] = "1124 St-Laurent, Montreal";
             mySet.Tables["Clients"].Rows.Add(myrow);
 
             myrow = mySet.Tables["Clients"].NewRow();
             myrow["Nom"] = "Sophie Cote";
-            myrow["Telephone"] = "5148897766";
+            myrow["Telephone"] = "321";
             myrow["Adresse"] = "298 Beaubien, Montreal";
             mySet.Tables["Clients"].Rows.Add(myrow);
 
@@ -197,10 +193,33 @@ namespace prjWebCsPizzaModele
         private DataSet RemplirDataset()
         {
             DataSet unSet = new DataSet();
-            // se connecter a la BD et remplir dataset avec les tables
+
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\ivanj\\Desktop\\AAA\\teccart\\session-4\\at\\final-v4\\prjWebCsPizzaModele\\prjWebCsPizzaModele\\App_Data\\PizzaDB.mdf;Integrated Security=True";
+            
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            connection.Open();
+
+            SqlDataAdapter pizzaAdapter = new SqlDataAdapter("SELECT * FROM Pizzas", connection);
+            pizzaAdapter.Fill(unSet, "Pizzas");
+
+            SqlDataAdapter clientsAdapter = new SqlDataAdapter("SELECT * FROM Clients", connection);
+            clientsAdapter.Fill(unSet, "Clients");
+
+            SqlDataAdapter taillesAdapter = new SqlDataAdapter("SELECT * FROM Tailles", connection);
+            taillesAdapter.Fill(unSet, "Tailles");
+
+            SqlDataAdapter garnituresAdapter = new SqlDataAdapter("SELECT * FROM Garnitures", connection);
+            garnituresAdapter.Fill(unSet, "Garnitures");
+
+            SqlDataAdapter croutesAdapter = new SqlDataAdapter("SELECT * FROM Croutes", connection);
+            croutesAdapter.Fill(unSet, "Croutes");
+
+            connection.Close();
 
             return unSet;
         }
+
 
         private void MontrerBoutons(bool btnAjModSup, bool btnSauvAnnu)
         {
